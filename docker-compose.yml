@@ -1,0 +1,16 @@
+
+version: '3'
+services:
+  redis:
+    image: 'redis:5.0.5'
+  clickhouse:
+    image: yandex/clickhouse-server
+    volumes:
+      - './clickhouse:/var/lib/clickhouse'
+    ports:
+      - '8123:8123'
+      - '9000:9000'
+    entrypoint:
+       - /bin/bash
+       - -c
+       - /usr/bin/clickhouse-server --config-file=/etc/clickhouse-server/config.xml
